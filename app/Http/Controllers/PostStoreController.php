@@ -25,7 +25,6 @@ class PostStoreController extends Controller
 
         $validated['user_id'] = Auth::user()->id;
         $validated['slug'] =  Str::slug($request->title);
-        $validated['email_sent'] = 0;
 
         $this->postRepo->store($validated);
     }
