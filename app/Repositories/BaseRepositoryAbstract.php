@@ -28,4 +28,9 @@ abstract class BaseRepositoryAbstract implements RepositoryInterface
         return $this->model->create($attrs);
     }
 
+    public function get()
+    {
+        return $this->model->get();
+    }
+
 }

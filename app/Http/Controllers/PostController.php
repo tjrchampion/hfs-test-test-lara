@@ -20,7 +20,9 @@ class PostController extends Controller
 
     public function __invoke()
     {
-        return Inertia::render('Posts/Index');
+        return Inertia::render('Posts/Index', [
+            'posts' => $this->postRepo->get(),
+        ]);
     }
 
     public function index()
