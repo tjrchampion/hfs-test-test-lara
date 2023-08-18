@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PostStoreRequest;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\PostStoreRequest;
 use App\Repositories\Interface\PostRepositoryInterface;
 
 class PostStoreController extends Controller
@@ -22,7 +23,7 @@ class PostStoreController extends Controller
     {
         $validated = $request->validated();
 
-        $validated['user_id'] = 1;
+        $validated['user_id'] = Auth::user()->id;
         $validated['slug'] =  Str::slug($request->title);
         $validated['email_sent'] = 0;
 

@@ -6,7 +6,6 @@
     </h1>
 
       <form v-on:submit.prevent="submitForm" v-if="$page.props.auth.user">
-
         <div class="mb-2 mb-2">
           <label for="postTile">Post title</label>
           <TextInput
@@ -28,10 +27,6 @@
           ></textarea>
           <div v-if="form.errors.body" class="text-red-500">{{ form.errors.body }}</div>  
         </div>
-
-
-
-
 
         <button type="submit" class="border border-transparent rounded-md shadow px-3 py-2 inline-flex items-center text-base leading-6 font-small bg-white text-dark-blue-800 hover:text-gray-700 transition duration-150 ease-in-out">Create post</button>
       </form>
