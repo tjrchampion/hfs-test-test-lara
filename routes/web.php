@@ -34,7 +34,8 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+    Route::post('/post', PostStoreController::class)->name('posts.store');
 });
 
-Route::get('/', PostController::class);
-Route::post('/post', PostStoreController::class)->name('posts.store');
+Route::get('/', PostController::class)->name('posts');
+Route::get('/post/{slug}', 'App\Http\Controllers\PostController@viewPost')->name('post');

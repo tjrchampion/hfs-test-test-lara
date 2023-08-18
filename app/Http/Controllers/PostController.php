@@ -18,15 +18,26 @@ class PostController extends Controller
         $this->postRepo = $postRepo;
     }
 
-    public function __invoke()
+    public function __invoke(Request $request)
     {
         return Inertia::render('Posts/Index', [
-            'posts' => $this->postRepo->get(),
+            'posts' => $this->postRepo->getPosts($request),
         ]);
     }
 
-    public function index()
+    public function viewPost(Request $request)
     {
-        return 'bla';
+        if($this->postRepo->getPost($request) === null) {
+            return Inertia::render('Posts/NotFound', [
+                'post' => [
+                    'message' => 'Whoops, no blog post was found...',
+                    'title' => $request->route('slug'),
+                ]
+            ]);
+        }
+
+        return Inertia::render('Posts/Post', [
+            'post' => $this->postRepo->getPost($request),
+        ]);
     }
 }

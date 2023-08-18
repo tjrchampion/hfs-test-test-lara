@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -21,7 +22,8 @@ class PostResource extends JsonResource
             'slug' => $this->slug,
             'created_at' => $this->created_at->diffForHumans(),
             'post_user' => $this->user->name,
+            'comments' => $this->comments,
         ];
-        //return parent::toArray($request);
     }
+
 }
