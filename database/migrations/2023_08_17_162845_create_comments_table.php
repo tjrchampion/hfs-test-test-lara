@@ -15,16 +15,13 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedBigInteger('post_id');
+            $table->foreign('post_id')->references('id')->on('posts')->onUpdate('cascade')->onDelete('cascade');
             $table->text('body');
             $table->timestamps();
         });
 
-
-        // Schema::table('comments', function (Blueprint $table) {
-        //     $table->foreignId('user_id')->constrained()->on('users');
-        //     $table->foreignId('post_id')->constrained()->on('posts')->onUpdate('cascade')->onDelete('cascade');
-        // });
     }
 
     /**
@@ -32,6 +29,12 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('comments');
+        Schema::disableForeignKeyConstraints();
+        
+        Schema::table('comments', function (Blueprint $table)
+        {
+            $table->dropForeign('user_id');
+            $table->dropColumn('post_id');
+        });
     }
 };

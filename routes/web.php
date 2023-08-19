@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostStoreController;
+use App\Http\Controllers\CommentStoreController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +36,7 @@ Route::middleware([
         return Inertia::render('Dashboard');
     })->name('dashboard');
     Route::post('/post', PostStoreController::class)->name('posts.store');
-    Route::post('/comment/{id}', CommentStoreController::class)->name('comment.store');
+    Route::post('/comment', CommentStoreController::class)->name('comment.store');
 });
 
 Route::get('/', PostController::class)->name('posts');
