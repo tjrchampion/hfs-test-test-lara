@@ -14,11 +14,15 @@
         <hr class="mt-5 mb-5 border-b-4 border-indigo-500 " />
 
         <h5 class="mb-4 text-2xl dark:text-black md:text-2xl lg:text-2xl">Comments ({{ post.comments.length }})</h5>
-
         <ul>
-          <li v-for="(comment, key) in post.comments" :key="key">
+          <li v-for="(comment, key) in post.comments" :key="key" class="pt-4 pb-4 border-b-2">
             <h6 class="font-black mb-1 text-1xl dark:text-black md:text-1xl lg:text-1xl">{{ comment.user.name }}</h6>
-            <p class="pb-4 mb-5 border-b-2 text-base leading-6 text-black" >{{ comment.body }}</p>
+            <p class="mb-5 text-base leading-6 text-black" >{{ comment.body }}</p>
+
+            <div v-if="$page.props.auth.user" class="p-0 m-0">
+              <Link class="border border-transparent rounded-md shadow px-1 py-1 inline-flex items-center text-base leading-3 font-small bg-white text-dark-blue-800 hover:text-gray-700 transition duration-150 ease-in-out" v-if="$page.props.auth.user.id === comment.user_id">Edit</Link>
+            </div>
+
           </li>
         </ul>
 
